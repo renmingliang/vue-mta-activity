@@ -5,9 +5,26 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>2018“我向杨总说句话”建言征集活动</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
-    <script src="/static/rem.js"></script>
+    <title>2018“我向杨董说句话”谏言征集活动</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./static/favicon.ico" />
+    <script>
+      (function (doc, win) {
+        var docEl = doc.documentElement
+        var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
+        var recalc = function () {
+          var clientWidth = docEl.clientWidth
+          if (!clientWidth) return
+          if (clientWidth >= 750) {
+            docEl.style.fontSize = '100px'
+          } else {
+            docEl.style.fontSize = 100 * (clientWidth / 750) + 'px'
+          }
+        }
+        if (!doc.addEventListener) return
+        win.addEventListener(resizeEvt, recalc, false)
+        doc.addEventListener('DOMContentLoaded', recalc, false)
+      })(document, window)
+    </script>
   </head>
   <body>
     <div id="app"></div>

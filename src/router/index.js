@@ -15,22 +15,19 @@ export const constantRouterMap = [
     meta: { title: '首页', icon: 'fa-camera-retro' }
   },
   {
-    path: '/column/:type',
+    path: '/column/:id',
     name: 'column',
     component: _import('column'),
-    meta: { title: '栏目', icon: 'fa-handshake-o' }
-  },
-  {
-    path: '/form/:type',
-    name: 'form',
-    component: _import('form'),
-    meta: { title: '表单', icon: 'fa-briefcase' }
+    meta: { title: '留言栏目', icon: 'fa-handshake-o' }
   },
   {
     path: '/detail/:id',
     name: 'detail',
     component: _import('detail'),
-    meta: { title: '详情', icon: 'fa-cutlery' }
+    meta: { title: '留言详情', icon: 'fa-cutlery' }
+  },
+  {
+    path: '*', redirect: '/'
   }
 ]
 

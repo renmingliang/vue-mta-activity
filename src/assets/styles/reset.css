@@ -54,7 +54,8 @@ table {
 }
 body{
 	font-size: 0.30rem;
-	line-height: 1.5;
+  line-height: 1.5;
+  background: #faf8fe;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
 }
 a{
@@ -64,4 +65,29 @@ a{
 }
 li{
   list-style: none;
+}
+/*淸浮动*/
+.clear{
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+.clearfix:after ,.clearfix:before{
+  clear: both;
+  content: ' ';
+  display: block;
+  font-size: 0;
+  line-height: 0;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+.pull-left{
+  float: left;
+}
+.pull-right{
+  float: right;
 }

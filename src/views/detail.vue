@@ -1,31 +1,65 @@
 <template>
   <div class="content">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+    <div class="top">
+      <div class="top-img">
+        <img src="../assets/images/banner.png">
+      </div>
+      <div class="top-txt">
+        <p>{{ msg }}</p>
+      </div>
+    </div>
+    <div class="tags-view">
+      <p><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp; 留言详情</p>
+    </div>
+    <div class="box">
+      <div class="article">
+        <h1 class="article-title">{{ detail.title }}</h1>
+        <div class="article-info">
+          <span class="info-date">{{ detail.createtime | parseTime }}</span>
+          <span class="info-column">所属分类：{{ detail.label_name }}</span>
+        </div>
+        <div class="article-desc">
+          <p>
+            <span class="author">{{ detail.name? detail.name : '匿名' }}：</span>
+            <span v-html="detail.content"></span>
+          </p>
+        </div>
+        <div class="article-btn">
+          <router-link :to="{name: 'column', params: { id: detail.labelid }}">
+            <div class="go-form"><i class="fa fa-commenting" aria-hidden="true"></i>我也去留言</div>
+          </router-link>
+        </div>
+      </div>
+    </div>
+    <div class="wxvfooter">
+      <p class="wxvfootertxt"><span>保趣科技</span>提供技术支持</p>
+    </div>
   </div>
 </template>
 
 <script>
+import { formateDate } from '../utils/validate'
+import { mapState } from 'vuex'
+import api from '../api'
 export default {
-  name: 'index',
+  name: 'column',
   data () {
     return {
-      msg: '我向杨总说句话'
+      id: this.$route.params.id
+    }
+  },
+  created () {
+    this.$store.dispatch({type: 'getDetail', url: api.getDetail(this.id)})
+  },
+  computed: {
+    ...mapState([
+      'msg',
+      'detail'
+    ])
+  },
+  filters: {
+    parseTime (val) {
+      return formateDate(val)
     }
   }
 }
@@ -33,19 +67,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-  li {
-    display: inline-block;
-    margin: 0 10px;
-    a {
-      color: #42b983;
-    }
-  }
-}
 
 </style>

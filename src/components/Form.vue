@@ -1,25 +1,5 @@
 <template>
   <div class="content">
-    <div class="top">
-      <div class="top-img">
-        <img src="../assets/images/banner.png">
-      </div>
-      <div class="top-txt">
-        <p>{{ msg }}</p>
-      </div>
-    </div>
-    <nav class="nav-link">
-      <ul class="clearfix">
-        <li class="pull-left" v-for="(nav, index) in navs" :key="index">
-          <span v-if="!!nav.path">
-            <router-link :to="{name: nav.name}">{{ nav.meta.title }}</router-link>&nbsp;&gt;&nbsp;
-          </span>
-          <span v-else>
-            {{ nav.meta.title }}
-          </span>
-        </li>
-      </ul>
-    </nav>
     <div class="tags-view">
       <p><i class="fa fa-flag" aria-hidden="true"></i>&nbsp; 我要留言</p>
     </div>
@@ -62,41 +42,18 @@
         </div>
       </div>
     </div>
-    <div v-if="!!lists" class="box">
-      <h2><a href="javascript:;">其他人在说什么？</a></h2>
-      <div class="net-list">
-        <ul>
-          <li class="net-item mb" v-for="(list, index) in lists" :key="index">
-            <router-link :to="{name: 'detail', params: {id: list.Id}}">
-              <div class="net-item-title">
-                <span>{{ list.title }}</span>
-              </div>
-              <div class="net-item-desc" v-html="list.content"></div>
-              <div class="net-item-info">
-                <span class="info-photo"><i class="fa fa-user-o" aria-hidden="true"></i></span>
-                <span class="info-author">{{ list.name? list.name : '匿名' }}</span>
-                <span class="info-time">{{ list.createtime | parseTime }}</span>
-              </div>
-            </router-link>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="wxvfooter">
-      <p class="wxvfootertxt"><span>保趣科技</span>提供技术支持</p>
-    </div>
     <toast v-model="resSubmit.status" :type="resSubmit.type" @on-hide="hideToast">{{ resSubmit.tips }}</toast>
     <loading :show="isLoad" text="Loading"></loading>
   </div>
 </template>
 
 <script>
-import { Group, XButton, XInput, XTextarea, Toast, Loading, Checker, CheckerItem, cookie } from 'vux'
-import { formateDate, isSpace, isMobile } from '../utils/validate'
+import { Group, XButton, XInput, XTextarea, Toast, Loading, Checker, CheckerItem } from 'vux'
+import { formateDate, isSpace, isMobile } from '../utils'
 import { mapState } from 'vuex'
 import api from '../api'
 export default {
-  name: 'column',
+  name: 'Form',
   data () {
     return {
       navs: [],
@@ -124,29 +81,13 @@ export default {
     CheckerItem,
     Loading
   },
-  created () {
-    this.$store.dispatch({type: 'getLists', url: api.getLists(this.id)})
-    this.getBreadcrumb()
-  },
   computed: {
     ...mapState([
-      'msg',
       'checkerArr',
-      'lists',
       'isLoad'
     ])
   },
   methods: {
-    // 面包屑，即导航
-    getBreadcrumb () {
-      let matched = this.$route.matched.filter(item => item.name)
-      let sub = JSON.parse(cookie.get('sub'))
-      const first = matched[0]
-      if (first && first.name !== 'index') {
-        matched = [{ path: '/', name: 'index', meta: {title: '首页'} }].concat([{meta: {title: sub.name}}])
-      }
-      this.navs = matched
-    },
     // 提示成功后跳转
     hideToast () {
       if (this.resSubmit.result === '1') {
@@ -195,27 +136,35 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-.checker{
-  padding: 0.1rem;
-  margin-top: 0.2rem;
-  .vux-checker-box{
-    display: flex;
-    justify-content: space-around;
-  }
-  .checker-item {
-    width: 100px;
-    height: 26px;
-    line-height: 26px;
+.tags-view{
+  padding: 0 0.4rem;
+  font-size: 0.34rem;
+  line-height: 1rem;
+  color: #005499;
+  background-color: #eef7ff;
+  border-bottom: 1px solid #00579f;
+}
+.box{
+  padding-bottom: 0.3rem;
+  h2{
+    border-bottom: 0.02rem solid #e7e7e7;
     text-align: center;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    margin-right: 6px;
+    line-height: 1rem;
+    margin-bottom: 0.4rem;
+    a{
+      display: inline-block;
+      position: relative;
+      bottom: -0.04rem;
+      height: 100%;
+      font-size: 0.4rem;
+      border-bottom: 0.06rem solid #aaa;
+      color: #333;
+      text-decoration: none;
+      font-weight: normal;
+    }
   }
-  .checker-item-selected {
-    background: #ffffff url(../assets/images/active.png) no-repeat right bottom;
-    border-color: #ff4a00;
+  .ly-btn{
+    margin:0 0.2rem;
   }
 }
-
 </style>
