@@ -17,6 +17,13 @@ module.exports = {
         pathRewrite: {
           '^/test/': ''
         }
+      },
+      '/prod': {	// 测试环境
+        target: 'http://www.jaja365.cn/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/prod/': ''
+        }
       }
     },
 

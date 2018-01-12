@@ -14,11 +14,11 @@ const mutations = {
   },
 
   [types.SHOW_LOAD] (state) {
-    state.isLoad = true
+    state.isPost = true
   },
 
   [types.HIDE_LOAD] (state) {
-    state.isLoad = false
+    state.isPost = false
   },
 
   [types.GET_COLUMNS] (state, payload) {

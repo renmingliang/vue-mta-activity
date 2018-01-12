@@ -15,21 +15,31 @@
 
 <script>
 import { cookie } from 'vux'
+import { mapState } from 'vuex'
 export default {
   name: 'Breadcrumb',
   data () {
     return {
-      navs: null
+      navs: []
     }
   },
   created () {
     this.getBreadcrumb()
   },
+  computed: {
+    ...mapState([
+      'columns'
+    ])
+  },
   methods: {
     // 面包屑，即导航
     getBreadcrumb () {
       let matched = this.$route.matched.filter(item => item.name)
-      let sub = JSON.parse(cookie.get('sub'))
+      if (this.columns.length !== 0) {
+        const temp = this.columns.find(item => item.Id === this.id)
+        cookie.set('sub', JSON.stringify(temp))
+      }
+      const sub = JSON.parse(cookie.get('sub'))
       const first = matched[0]
       if (first && first.name !== 'index') {
         matched = [{ path: '/', name: 'index', meta: {title: '首页'} }].concat([{meta: {title: sub.name}}])

@@ -12,6 +12,9 @@ import './assets/styles/common.less'
 // 引入font-css
 import 'font-awesome/css/font-awesome.min.css'
 
+// 引入页面切换loading
+import './viewLoad'
+
 // 通过Vue.http来请求
 import { AjaxPlugin } from 'vux'
 Vue.use(AjaxPlugin)

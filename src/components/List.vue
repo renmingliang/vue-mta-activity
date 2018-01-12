@@ -1,9 +1,9 @@
 <template>
-  <div v-if="!!lists" class="box">
+  <div v-if="!!lists.length" class="box">
     <h2><a href="javascript:;">其他人在说什么？</a></h2>
     <div class="net-list">
       <ul>
-        <li class="net-item mb" v-for="(list, index) in lists" :key="index">
+        <li class="net-item" v-for="(list, index) in lists" :key="index">
           <router-link :to="{name: 'detail', params: {id: list.Id}}">
             <div class="net-item-title">
               <span>{{ list.title }}</span>
@@ -27,17 +27,22 @@ import { mapState } from 'vuex'
 import api from '../api'
 export default {
   name: 'List',
-  data () {
-    return {
-      id: this.$route.params.id
+  props: {
+    id: {
+      type: String,
+      default: '0'
     }
+  },
+  data () {
+    return {}
   },
   created () {
     this.$store.dispatch({type: 'getLists', url: api.getLists(this.id)})
   },
   computed: {
     ...mapState([
-      'lists'
+      'lists',
+      'total'
     ])
   },
   filters: {
@@ -50,6 +55,35 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+.scroll-list-wrap{
+  .list-count{
+    text-align: center;
+    padding-bottom: 0.2rem;
+    span{
+      font-size: 0.44rem;
+      font-weight: bold;
+    }
+  }
+  .list-wrapper{
+    height: 7rem;
+    overflow: hidden;
+    position: relative;
+    background: #fff;
+    .scroll-content{
+      position: relative;
+      z-index: 1;
+      .net-item:first-of-type{
+        margin-top: 0;
+      }
+    }
+    .pullup-wrapper{
+      width: 100%;
+      text-align: center;
+      padding: 0.1rem 0;
+      font-size: 0.24rem;
+    }
+  }
+}
 .box{
     padding-bottom: 0.3rem;
     h2{

@@ -62,20 +62,24 @@ const actions = {
    * url: payload.url
    */
   getLists ({ commit, state }, payload) {
-    Vue.http({
-      method: 'get',
-      url: payload.url
+    return new Promise((resolve, reject) => {
+      Vue.http({
+        method: 'get',
+        url: payload.url
+      })
+      .then(
+        // 这里是处理正确的回调
+        response => {
+          commit({type: types.GET_LISTS, lists: response.data})
+          resolve(response.data)
+        },
+        // 这里是处理错误的回调
+        err => {
+          console.log('fail', err)
+          reject(err)
+        }
+      )
     })
-    .then(
-      // 这里是处理正确的回调
-      response => {
-        commit({type: types.GET_LISTS, lists: response.data})
-      },
-      // 这里是处理错误的回调
-      err => {
-        console.log('fail', err)
-      }
-    )
   },
   /**
    * getDetail

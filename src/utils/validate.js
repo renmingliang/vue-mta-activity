@@ -59,3 +59,28 @@ export function isMobile (str) {
   }
   return !res.test(str)
 }
+
+/**
+ * getRect
+ * @param {String} el
+ * @return {Object}
+ * 返回元素 { top, left, width, height}
+ */
+export function getRect (el) {
+  if (el instanceof window.SVGElement) {
+    var rect = el.getBoundingClientRect()
+    return {
+      top: rect.top,
+      left: rect.left,
+      width: rect.width,
+      height: rect.height
+    }
+  } else {
+    return {
+      top: el.offsetTop,
+      left: el.offsetLeft,
+      width: el.offsetWidth,
+      height: el.offsetHeight
+    }
+  }
+}

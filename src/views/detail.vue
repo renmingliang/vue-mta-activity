@@ -16,7 +16,7 @@
         <h1 class="article-title">{{ detail.title }}</h1>
         <div class="article-info">
           <span class="info-date">{{ detail.createtime | parseTime }}</span>
-          <span class="info-column">所属分类：{{ detail.label_name }}</span>
+          <span class="info-column">谏言栏目：{{ detail.label_name }}</span>
         </div>
         <div class="article-desc">
           <p>
@@ -24,7 +24,7 @@
             <span v-html="detail.content"></span>
           </p>
         </div>
-        <div class="article-btn">
+        <div class="common-btn">
           <router-link :to="{name: 'column', params: { id: detail.labelid }}">
             <div class="go-form"><i class="fa fa-commenting" aria-hidden="true"></i>我也去留言</div>
           </router-link>

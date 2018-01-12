@@ -62,11 +62,11 @@
         </div>
       </div>
     </div>
-    <div v-if="!!lists" class="box">
+    <div v-if="!!lists.length" class="box">
       <h2><a href="javascript:;">其他人在说什么？</a></h2>
       <div class="net-list">
         <ul>
-          <li class="net-item mb" v-for="(list, index) in lists" :key="index">
+          <li class="net-item" v-for="(list, index) in lists" :key="index">
             <router-link :to="{name: 'detail', params: {id: list.Id}}">
               <div class="net-item-title">
                 <span>{{ list.title }}</span>
@@ -81,12 +81,17 @@
           </li>
         </ul>
       </div>
+      <div v-if="lists.length>=15" class="common-btn">
+        <router-link :to="{name: 'message', params: { id: id }}">
+          <div class="go-form"><i class="fa fa-list" aria-hidden="true"></i>查看更多留言</div>
+        </router-link>
+      </div>
     </div>
     <div class="wxvfooter">
       <p class="wxvfootertxt"><span>保趣科技</span>提供技术支持</p>
     </div>
     <toast v-model="resSubmit.status" :type="resSubmit.type" @on-hide="hideToast">{{ resSubmit.tips }}</toast>
-    <loading :show="isLoad" text="Loading"></loading>
+    <loading :show="isPost" text="Loading"></loading>
   </div>
 </template>
 
@@ -128,19 +133,31 @@ export default {
     this.$store.dispatch({type: 'getLists', url: api.getLists(this.id)})
     this.getBreadcrumb()
   },
+  mounted () {
+    this.resetScroll()
+  },
   computed: {
     ...mapState([
       'msg',
       'checkerArr',
+      'columns',
       'lists',
-      'isLoad'
+      'isPost'
     ])
   },
   methods: {
+    // 纠正页面滚动置顶
+    resetScroll () {
+      document.documentElement.scrollTo(0, 0)
+    },
     // 面包屑，即导航
     getBreadcrumb () {
       let matched = this.$route.matched.filter(item => item.name)
-      let sub = JSON.parse(cookie.get('sub'))
+      if (this.columns.length !== 0) {
+        const temp = this.columns.find(item => item.Id === this.id)
+        cookie.set('sub', JSON.stringify(temp))
+      }
+      const sub = JSON.parse(cookie.get('sub'))
       const first = matched[0]
       if (first && first.name !== 'index') {
         matched = [{ path: '/', name: 'index', meta: {title: '首页'} }].concat([{meta: {title: sub.name}}])

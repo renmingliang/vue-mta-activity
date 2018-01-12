@@ -15,6 +15,12 @@ export const constantRouterMap = [
     meta: { title: '首页', icon: 'fa-camera-retro' }
   },
   {
+    path: '/message/:id',
+    name: 'message',
+    component: _import('message'),
+    meta: { title: '留言列表', icon: 'fa-list' }
+  },
+  {
     path: '/column/:id',
     name: 'column',
     component: _import('column'),

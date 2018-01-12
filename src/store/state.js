@@ -9,7 +9,7 @@ const state = {
   lists: [],
   total: 0,
   detail: {},
-  isLoad: false,
+  isPost: false,
   resSubmit: {}
 }
 

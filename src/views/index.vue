@@ -12,11 +12,6 @@
       <h2><a href="javascript:;">看看你想说什么？</a></h2>
       <div class="tips">点击你感兴趣的分类，即可开始留言！</div>
       <nav class="navbar">
-        <!-- <grid :cols="3">
-          <grid-item v-for="(route, index) in routes" :key="index" :link="{name: route.name, params: {type: index, id: index}}" :label="route.meta.title">
-            <i slot="icon" class="fa fa-2x" :class="route.meta.icon" aria-hidden="true"></i>
-          </grid-item>
-        </grid> -->
         <grid :cols="3">
           <grid-item v-for="(column, index) in columns" :key="index" :link="{path: '/column/'+column.Id}" :label="column.name" @on-item-click="onItemClick(column)">
             <img slot="icon" :src="'http://t.jaja365.cn/'+column.mainpic">
@@ -24,11 +19,11 @@
         </grid>
       </nav>
     </div>
-    <div class="box">
+    <div v-if="!!lists.length" class="box">
       <h2><a href="javascript:;">其他人在说什么？</a></h2>
       <div class="net-list">
         <ul>
-          <li class="net-item mb" v-for="(list, index) in lists" :key="index">
+          <li class="net-item" v-for="(list, index) in lists" :key="index">
             <router-link :to="{name: 'detail', params: {id: list.Id}}">
               <div class="net-item-title">
                 <span>{{ list.title }}</span>
@@ -42,6 +37,11 @@
             </router-link>
           </li>
         </ul>
+      </div>
+      <div v-if="lists.length>=15" class="common-btn">
+        <router-link :to="{name: 'message', params: { id: 0 }}">
+          <div class="go-form"><i class="fa fa-list" aria-hidden="true"></i>查看更多留言</div>
+        </router-link>
       </div>
     </div>
     <div class="wxvfooter">
@@ -59,6 +59,7 @@ export default {
   name: 'index',
   data () {
     return {
+      id: 0
     }
   },
   components: {
@@ -67,7 +68,7 @@ export default {
   },
   created () {
     this.$store.dispatch({type: 'getColumns', url: api.getColumns})
-    this.$store.dispatch({type: 'getLists', url: api.getLists(0)})
+    this.$store.dispatch({type: 'getLists', url: api.getLists(this.id)})
   },
   computed: {
     ...mapState([
