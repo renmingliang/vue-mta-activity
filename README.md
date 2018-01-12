@@ -6,7 +6,7 @@
 
 技术栈：vue + vux + vuex + vue-router + webpack + ECMAjavascript6 + less + better-scroll + font-awesome +fastclick
 
-项目地址：[www.jaja365.cn/wxyzsjh](www.jaja365.cn/wxyzsjh "项目地址")
+项目地址：[点击跳转](http://www.jaja365.cn/wxyzsjh "项目地址")
 
 ## Build Setup
 
