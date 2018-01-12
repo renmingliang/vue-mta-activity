@@ -4,8 +4,10 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
+
 // A modern alternative to CSS resets
 // import 'normalize.css/normalize.css'
+
 import './assets/styles/reset.css'
 import './assets/styles/common.less'
 
