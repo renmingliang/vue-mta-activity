@@ -1,6 +1,14 @@
 # wxyzsjh
 
-> A Vue.js project
+> 2018年会，民太安集团，我向杨董说句话谏言征集活动。
+
+## description
+
+技术栈：vue + vux + vuex + vue-router + webpack + ECMAjavascript6 + less + better-scroll + font-awesome +fastclick
+
+项目地址：[点击跳转](http://www.jaja365.cn/wxyzsjh "项目地址")
+
+扫码进入：![若未显示，点击上面项目地址一样](static/qrcode.png)
 
 ## Build Setup
 
