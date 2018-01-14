@@ -18,6 +18,11 @@
         </li>
       </ul>
     </div>
+    <div v-if="lists.length>=14" class="common-btn">
+      <router-link :to="{name: 'message', params: { id: id }}">
+        <div class="go-form"><i class="fa fa-list" aria-hidden="true"></i>查看更多留言</div>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -55,81 +60,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-.scroll-list-wrap{
-  .list-count{
-    text-align: center;
-    padding-bottom: 0.2rem;
-    span{
-      font-size: 0.44rem;
-      font-weight: bold;
-    }
-  }
-  .list-wrapper{
-    height: 7rem;
-    overflow: hidden;
-    position: relative;
-    background: #fff;
-    .scroll-content{
-      position: relative;
-      z-index: 1;
-      .net-item:first-of-type{
-        margin-top: 0;
-      }
-    }
-    .pullup-wrapper{
-      width: 100%;
-      text-align: center;
-      padding: 0.1rem 0;
-      font-size: 0.24rem;
-    }
-  }
-}
-.box{
-    padding-bottom: 0.3rem;
-    h2{
-      border-bottom: 0.02rem solid #e7e7e7;
-      text-align: center;
-      line-height: 1rem;
-      margin-bottom: 0.4rem;
-      a{
-        display: inline-block;
-        position: relative;
-        bottom: -0.04rem;
-        height: 100%;
-        font-size: 0.4rem;
-        border-bottom: 0.06rem solid #aaa;
-        color: #333;
-        text-decoration: none;
-        font-weight: normal;
-      }
-    }
-  .net-list{
-    padding: 0 0.2rem;
-    background: #fff;
-    .net-item{
-      margin: 0.2rem 0;
-      padding: 0.2rem 0;
-      border-bottom: 0.02rem dashed #ccc;
-      .net-item-title{
-        font-size: 0.32rem;
-        font-weight: 700;
-        display: block;
-        margin: .6em 0;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        color: #06c;
-      }
-      .net-item-desc{
-        color: #666;
-      }
-      .net-item-info{
-        color: #5d5d5d;
-        margin-top: 0.1rem;
-        text-align: right;
-        font-size: 0.28rem;
-      }
-    }
-  }
-}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div>
     <div class="tags-view">
       <p><i class="fa fa-flag" aria-hidden="true"></i>&nbsp; 我要留言</p>
     </div>
@@ -42,14 +42,14 @@
         </div>
       </div>
     </div>
-    <toast v-model="resSubmit.status" :type="resSubmit.type" @on-hide="hideToast">{{ resSubmit.tips }}</toast>
-    <loading :show="isLoad" text="Loading"></loading>
+    <toast v-model="resSubmit.status" is-show-mask :type="resSubmit.type" @on-hide="hideToast">{{ resSubmit.tips }}</toast>
+    <loading :show="isPost" text="Loading"></loading>
   </div>
 </template>
 
 <script>
 import { Group, XButton, XInput, XTextarea, Toast, Loading, Checker, CheckerItem } from 'vux'
-import { formateDate, isSpace, isMobile } from '../utils'
+import { formateDate, isSpace, isMobile } from '../utils/validate'
 import { mapState } from 'vuex'
 import api from '../api'
 export default {
@@ -84,7 +84,7 @@ export default {
   computed: {
     ...mapState([
       'checkerArr',
-      'isLoad'
+      'isPost'
     ])
   },
   methods: {
@@ -136,35 +136,27 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-.tags-view{
-  padding: 0 0.4rem;
-  font-size: 0.34rem;
-  line-height: 1rem;
-  color: #005499;
-  background-color: #eef7ff;
-  border-bottom: 1px solid #00579f;
-}
-.box{
-  padding-bottom: 0.3rem;
-  h2{
-    border-bottom: 0.02rem solid #e7e7e7;
-    text-align: center;
-    line-height: 1rem;
-    margin-bottom: 0.4rem;
-    a{
-      display: inline-block;
-      position: relative;
-      bottom: -0.04rem;
-      height: 100%;
-      font-size: 0.4rem;
-      border-bottom: 0.06rem solid #aaa;
-      color: #333;
-      text-decoration: none;
-      font-weight: normal;
+.checker{
+  padding: .1rem;
+  margin-top: .2rem;
+  .vux-checker-box{
+    display: flex;
+    justify-content: space-around;
+    .checker-item {
+      width: 2rem;
+      height: 0.48rem;
+      line-height: 0.48rem;
+      font-size: 0.28rem;
+      text-align: center;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      margin-right: 0.12rem;
     }
-  }
-  .ly-btn{
-    margin:0 0.2rem;
+    .checker-item-selected {
+      background: #ffffff url(../assets/images/active.png) no-repeat right bottom;
+      border-color: #ff4a00;
+    }
   }
 }
 </style>

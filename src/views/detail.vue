@@ -1,13 +1,6 @@
 <template>
   <div class="content">
-    <div class="top">
-      <div class="top-img">
-        <img src="../assets/images/banner.png">
-      </div>
-      <div class="top-txt">
-        <p>{{ msg }}</p>
-      </div>
-    </div>
+    <Header></Header>
     <div class="tags-view">
       <p><i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp; 留言详情</p>
     </div>
@@ -31,13 +24,12 @@
         </div>
       </div>
     </div>
-    <div class="wxvfooter">
-      <p class="wxvfootertxt"><span>保趣科技</span>提供技术支持</p>
-    </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
+import { Header, Footer } from '../components'
 import { formateDate } from '../utils/validate'
 import { mapState } from 'vuex'
 import api from '../api'
@@ -48,12 +40,15 @@ export default {
       id: this.$route.params.id
     }
   },
+  components: {
+    Header,
+    Footer
+  },
   created () {
     this.$store.dispatch({type: 'getDetail', url: api.getDetail(this.id)})
   },
   computed: {
     ...mapState([
-      'msg',
       'detail'
     ])
   },
@@ -67,5 +62,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-
 </style>

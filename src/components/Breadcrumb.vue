@@ -18,6 +18,12 @@ import { cookie } from 'vux'
 import { mapState } from 'vuex'
 export default {
   name: 'Breadcrumb',
+  props: {
+    id: {
+      type: String,
+      default: '0'
+    }
+  },
   data () {
     return {
       navs: []
@@ -52,12 +58,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-.nav-link{
-  background: #202530;
-  padding: 0.1rem 0.24rem;
-  color: #fff;
-  a{
-    color: #fff;
-  }
-}
 </style>
