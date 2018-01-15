@@ -29,7 +29,6 @@
 <script>
 import { formateDate } from '../utils/validate'
 import { mapState } from 'vuex'
-import api from '../api'
 export default {
   name: 'List',
   props: {
@@ -42,7 +41,7 @@ export default {
     return {}
   },
   created () {
-    this.$store.dispatch({type: 'getLists', url: api.getLists(this.id)})
+    this.$store.dispatch({type: 'getLists', id: this.id})
   },
   computed: {
     ...mapState([

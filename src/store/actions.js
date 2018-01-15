@@ -1,22 +1,17 @@
 import * as types from './mutation-types'
-import Vue from 'vue'
+import { postForm, getColumns, getLists, getDetail } from '../api'
 
 // actions， 异步操作数据，用于this.$store.dispatch
 const actions = {
   /**
    * postForm
    * new Promise((resolve, reject) => {})
-   * url: payload.url
    * data: payload.data
    */
   postForm ({ commit, state }, payload) {
     return new Promise((resolve, reject) => {
       commit({type: types.SHOW_LOAD})
-      Vue.http({
-        method: 'post',
-        url: payload.url,
-        data: payload.data
-      })
+      postForm(payload.data)
       .then(
         response => {
           commit({type: types.HIDE_LOAD})
@@ -34,14 +29,10 @@ const actions = {
   /**
    * getColumns
    * new Promise((resolve, reject) => {})
-   * url: payload.url
    */
   getColumns ({ commit, state }, payload) {
     return new Promise((resolve, reject) => {
-      Vue.http({
-        method: 'get',
-        url: payload.url
-      })
+      getColumns()
       .then(
         // 这里是处理正确的回调
         response => {
@@ -59,14 +50,12 @@ const actions = {
   /**
    * getLists
    * new Promise((resolve, reject) => {})
-   * url: payload.url
+   * id  : payload.id
+   * page: payload.page
    */
   getLists ({ commit, state }, payload) {
     return new Promise((resolve, reject) => {
-      Vue.http({
-        method: 'get',
-        url: payload.url
-      })
+      getLists(payload.id, payload.page)
       .then(
         // 这里是处理正确的回调
         response => {
@@ -84,10 +73,10 @@ const actions = {
   /**
    * getDetail
    * new Promise((resolve, reject) => {})
-   * url: payload.url
+   * id: payload.id
    */
   getDetail ({ commit, state }, payload) {
-    Vue.http.get(payload.url).then(
+    getDetail(payload.id).then(
       // 这里是处理正确的回调
       response => {
         commit({type: types.GET_DETAIL, data: response.data})

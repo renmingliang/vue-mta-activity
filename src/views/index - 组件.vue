@@ -70,7 +70,6 @@ import ScrollLoad from '../components/ScrollLoad'
 import { formateDate } from '../utils/validate'
 import { Grid, GridItem, LoadMore, cookie } from 'vux'
 import { mapState } from 'vuex'
-import api from '../api'
 export default {
   name: 'index',
   data () {
@@ -96,7 +95,7 @@ export default {
     ScrollLoad
   },
   created () {
-    this.$store.dispatch({type: 'getColumns', url: api.getColumns})
+    this.$store.dispatch({type: 'getColumns'})
     this.onPullingUp()
   },
   computed: {
@@ -129,7 +128,7 @@ export default {
       console.log('上拉加载')
       this.isPullUpLoad = true
       console.log(this.pullUpLoadObj)
-      this.$store.dispatch({type: 'getLists', url: api.getLists(0, this.page)}).then(res => {
+      this.$store.dispatch({type: 'getLists', id: 0, page: this.page}).then(res => {
         this.isPullUpLoad = false
         console.log(res)
         if (res.list.length !== 0) {

@@ -1,16 +1,35 @@
-const isTest = process.env.NODE_ENV === 'production' ? '' : '/test'
-export default {
-  /* 1、提交表单 */
-  postForm: isTest + '/index.php/zt/zt_topic/add',
-  /* 2、获取栏目 */
-  getColumns: isTest + '/index.php/zt/zt_topic/list_label',
-  /* 3、获取留言列表 */
-  getLists (id, page) {
-    page = page || 1
-    return isTest + `/index.php/zt/zt_topic/list_topic/${id}/${page}/15`
-  },
-  /* 4、获取留言详情 */
-  getDetail (id) {
-    return isTest + `/index.php/zt/zt_topic/view/${id}`
-  }
+import Vue from 'vue'
+
+ /* 1、提交表单 */
+export function postForm (data) {
+  return Vue.http({
+    method: 'post',
+    url: '/index.php/zt/zt_topic/add',
+    data
+  })
+}
+
+/* 2、获取栏目 */
+export function getColumns () {
+  return Vue.http({
+    method: 'get',
+    url: '/index.php/zt/zt_topic/list_label'
+  })
+}
+
+/* 3、获取留言列表 */
+export function getLists (id, page) {
+  const temp = page || 1
+  return Vue.http({
+    method: 'get',
+    url: `/index.php/zt/zt_topic/list_topic/${id}/${temp}/15`
+  })
+}
+
+/* 4、获取留言详情 */
+export function getDetail (id) {
+  return Vue.http({
+    method: 'get',
+    url: `/index.php/zt/zt_topic/view/${id}`
+  })
 }

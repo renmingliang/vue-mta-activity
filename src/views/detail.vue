@@ -32,7 +32,6 @@
 import { Header, Footer } from '../components'
 import { formateDate } from '../utils/validate'
 import { mapState } from 'vuex'
-import api from '../api'
 export default {
   name: 'column',
   data () {
@@ -45,7 +44,7 @@ export default {
     Footer
   },
   created () {
-    this.$store.dispatch({type: 'getDetail', url: api.getDetail(this.id)})
+    this.$store.dispatch({type: 'getDetail', id: this.id})
   },
   computed: {
     ...mapState([

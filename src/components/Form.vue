@@ -51,7 +51,6 @@
 import { Group, XButton, XInput, XTextarea, Toast, Loading, Checker, CheckerItem } from 'vux'
 import { formateDate, isSpace, isMobile } from '../utils/validate'
 import { mapState } from 'vuex'
-import api from '../api'
 export default {
   name: 'Form',
   data () {
@@ -114,7 +113,7 @@ export default {
         'name': this.name,
         'mobile': this.mobile
       }
-      this.$store.dispatch({type: 'postForm', url: api.postForm, data: json}).then(res => {
+      this.$store.dispatch({type: 'postForm', data: json}).then(res => {
         let temp = res.data
         let tempType = temp.result === '1' ? 'success' : 'cancel'
         this.resSubmit = {

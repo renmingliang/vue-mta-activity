@@ -16,7 +16,6 @@
 <script>
 import { Grid, GridItem, cookie } from 'vux'
 import { mapState } from 'vuex'
-import api from '../api'
 export default {
   name: 'Column',
   data () {
@@ -27,7 +26,7 @@ export default {
     GridItem
   },
   created () {
-    this.$store.dispatch({type: 'getColumns', url: api.getColumns})
+    this.$store.dispatch({type: 'getColumns'})
   },
   computed: {
     ...mapState([

@@ -41,7 +41,6 @@ import BScroll from 'better-scroll'
 import { formateDate } from '../utils/validate'
 import { LoadMore } from 'vux'
 import { mapState } from 'vuex'
-import api from '../api'
 export default {
   name: 'message',
   data () {
@@ -68,7 +67,7 @@ export default {
   methods: {
     loadData () {
       this.isPullUpLoad = true
-      this.$store.dispatch({type: 'getLists', url: api.getLists(this.id, this.page)}).then(res => {
+      this.$store.dispatch({type: 'getLists', id: this.id, page: this.page}).then(res => {
         this.isPullUpLoad = false
         this.lists = this.lists.concat(res.list)
         this.$nextTick(() => {
