@@ -2,7 +2,7 @@
 
 > 2018年会，民太安集团，我向杨董说句话谏言征集活动。
 
-## description
+## Description
 
 技术栈：vue + vux + vuex + vue-router + webpack + ECMA Script6 + less + better-scroll + font-awesome +fastclick
 
