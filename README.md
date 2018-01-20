@@ -4,7 +4,7 @@
 
 ## description
 
-技术栈：vue + vux + vuex + vue-router + webpack + ECMAjavascript6 + less + better-scroll + font-awesome +fastclick
+技术栈：vue + vux + vuex + vue-router + webpack + ECMA Script6 + less + better-scroll + font-awesome +fastclick
 
 项目地址：[点击跳转](http://www.jaja365.cn/wxyzsjh "项目地址")
 
