@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
- /* 1、提交表单 */
+/* 1、提交表单 */
 export function postForm (data) {
   return Vue.http({
     method: 'post',
