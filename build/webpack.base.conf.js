@@ -75,7 +75,7 @@ const webpackConfig = {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 80000, // 原本为10000，因为引入font-awesome打包后路径不对，故修改为80000
+          limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }

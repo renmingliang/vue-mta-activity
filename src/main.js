@@ -21,8 +21,11 @@ import './viewLoad'
 import { AjaxPlugin } from 'vux'
 Vue.use(AjaxPlugin)
 
-// 配置默认请求头为json格式，发送字符串将设置Content-Type为application/x-www-form-urlencoded
+// 配置默认请求头为json格式，发送字符串需要将设置Content-Type为application/x-www-form-urlencoded; charset=UTF-8
+// 注意这里还需要修改post前，将数据转换为ajax请求时的Form Data表单数据
+// 即如这样: 'a=1&b=2&c=3'
 Vue.http.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
+
 // 依据环境来配置相应请求地址
 Vue.http.defaults.baseURL = process.env.BASE_API
 
