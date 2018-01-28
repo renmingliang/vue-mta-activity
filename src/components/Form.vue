@@ -6,16 +6,16 @@
     <div class="box">
       <div class="ly-form">
         <group title="留言标题">
-          <x-input name="formTitle" placeholder="必填" v-model="title"></x-input>
+          <x-input :disabled="isDisabled" name="formTitle" placeholder="必填" v-model="title"></x-input>
         </group>
         <group title="留言内容">
-          <x-textarea name="formContent" placeholder="输入想说的话（必填）" autosize v-model="content"></x-textarea>
+          <x-textarea name="formContent" :placeholder="inputTips" autosize v-model="content"></x-textarea>
         </group>
         <group title="姓名" v-show="isHidden==='0'">
-          <x-input name="formName" placeholder="输入您的名字" v-model="name"></x-input>
+          <x-input :disabled="isDisabled" name="formName" placeholder="输入您的名字" v-model="name"></x-input>
         </group>
         <group title="联系电话" v-show="isHidden==='0'">
-          <x-input name="formMobile" placeholder="请输入手机号码" v-model="mobile" type="text" :max="11"></x-input>
+          <x-input :disabled="isDisabled" name="formMobile" placeholder="请输入手机号码" v-model="mobile" type="text" :max="11"></x-input>
         </group>
         <div class="checker">
           <checker
@@ -37,7 +37,11 @@
         </group> -->
         <div class="ly-btn">
           <group>
-            <x-button type="primary" @click.native="submitForm" action-type="button">提交</x-button>
+            <x-button type="primary" @click.native="submitForm" action-type="button"
+              :disabled="isDisabled"
+            >
+              提交
+            </x-button>
           </group>
         </div>
       </div>
@@ -63,6 +67,8 @@ export default {
         type: 'success',
         tips: '提交成功'
       },
+      isDisabled: false,
+      inputTips: '输入想说的话（必填）',
       isHidden: '0',
       title: '',
       content: '',
@@ -82,9 +88,16 @@ export default {
   },
   computed: {
     ...mapState([
+      'lastTime',
       'checkerArr',
       'isPost'
     ])
+  },
+  created () {
+    if (this.lastTime < +new Date()) {
+      this.isDisabled = true
+      this.inputTips = '本次活动已结束！'
+    }
   },
   methods: {
     // 提示成功后跳转
