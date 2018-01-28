@@ -97,6 +97,7 @@ export default {
     if (this.lastTime < +new Date()) {
       this.isDisabled = true
       this.inputTips = '本次活动已结束！'
+      alert(this.inputTips)
     }
   },
   methods: {
