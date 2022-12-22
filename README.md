@@ -6,8 +6,6 @@
 
 技术栈：vue + vux + vuex + vue-router + webpack + ECMA Script6 + less + better-scroll + font-awesome +fastclick
 
-扫码进入：![若未显示，点击上面项目地址一样](static/qrcode.png)
-
 ## Build Setup
 
 ``` bash
