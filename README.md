@@ -1,7 +1,5 @@
 # wxyzsjh
 
-> 2018年会，谏言征集活动。
-
 ## Description
 
 技术栈：vue + vux + vuex + vue-router + webpack + ECMA Script6 + less + better-scroll + font-awesome +fastclick
